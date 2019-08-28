@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -9,19 +9,18 @@ import NotifyPortal from '../Layout/NotifyPortal'
 const addToCart = (Wrapped) => {
 
     return (props) => {
-        const inputEl = useRef(null);
 
-        const [isDisable, setIsDisable] = useState(true);
+        const [numOfItem, setNumOfItem] = useState(0);
         const [isBooked, setIsBooked] = useState(false);
 
         const onAddToList = () => {
             setIsBooked(true);
-            setIsDisable(true);
+            setNumOfItem(0);
             var item = {
                 id: props.value ? props.value.id : null,
                 name: props.value ? props.value.name : null,
-                number: parseInt(inputEl.current.value),
-                price: props.value ? props.value.price * parseInt(inputEl.current.value) : null
+                number: parseInt(numOfItem),
+                price: props.value ? props.value.price * parseInt(numOfItem) : null
             }
             props.addToList(item);
         }
@@ -37,31 +36,24 @@ const addToCart = (Wrapped) => {
         }, [isBooked])
 
         const onHanleChange = (e) => {
-            var value = e.target.value;
-            console.log('e ', value);
-
-            if (parseInt(value) > 0) {
-                setIsDisable(false);
-            }
+            setNumOfItem(parseInt(e.target.value));
         }
-
-        console.log('inputEl', inputEl.current ? true : false);
         return (
 
             <Wrapped {...props}>
                 <Fragment >
                     <div className="form-group">
                         <label htmlFor=""></label>
-                        <input ref={inputEl}
+                        <input
                             className="form-control" type="number"
                             min="0" max="10"
-                            //  value={inputEl.current.value}
+                            value={numOfItem}
                             onChange={onHanleChange}
                         />
                         <small id="helpId" className="form-text text-muted">Số lượng</small>
                     </div>
                     <div className="form-group">
-                        <button disabled={isDisable}
+                        <button disabled={numOfItem <= 0 ? true : false}
                             type="button"
                             onClick={onAddToList}
                             className="btn btn-primary">Thêm</button>

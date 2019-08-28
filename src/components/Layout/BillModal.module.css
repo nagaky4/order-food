@@ -1,0 +1,8 @@
+.BillModalContainer {
+  position: fixed;
+  top: 10%;
+  left: 20%;
+  z-index: 10;
+  width: 60%;
+  text-align: center;
+}
