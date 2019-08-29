@@ -1,0 +1,9 @@
+.BackDrop {
+  opacity: 0.8;
+  z-index: 10;
+  width: 100%;
+  background: #b1abab;
+  height: 100%;
+  position: fixed;
+  top: 0;
+}

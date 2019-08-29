@@ -2,7 +2,7 @@ import * as types from '../constantTypes/index'
 
 var initialState = [];
 
-const listBooked = (state = initialState, action) => {
+const listBookedReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case types.ADD_TO_LIST:
@@ -38,4 +38,4 @@ const listBooked = (state = initialState, action) => {
     }
 }
 
-export default listBooked;
+export default listBookedReducer;

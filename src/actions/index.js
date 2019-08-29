@@ -24,3 +24,15 @@ export const _deleteItem = (id) => {
         }
     }
 }
+
+export const _openModal = () => {
+    return {
+        type: types.OPEN_MODAL
+    }
+}
+
+export const _closeModal = () => {
+    return {
+        type: types.CLOSE_MODAL
+    }
+}

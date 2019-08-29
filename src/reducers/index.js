@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
-import listBooked from './listBooked';
+import listBookedReducer from './listBookedReducer';
+import isOpenModalReducer from './isOpenModalReducer';
 
 export const myReducer = combineReducers({
-    listBooked: listBooked
+    listBooked: listBookedReducer,
+    isOpenModalReducer: isOpenModalReducer
 });

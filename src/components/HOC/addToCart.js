@@ -4,7 +4,7 @@ import { compose } from 'redux';
 
 import * as actions from '../../actions/index';
 
-import NotifyPortal from '../Layout/NotifyPortal'
+import NotifyPortal from '../UI/Notify/NotifyPortal'
 
 const addToCart = (Wrapped) => {
 
@@ -29,7 +29,7 @@ const addToCart = (Wrapped) => {
             var timeOutIsBooked = null;
             timeOutIsBooked = setTimeout(() => {
                 setIsBooked(false);
-            }, 1000);
+            }, 2000);
             return () => {
                 return clearTimeout(timeOutIsBooked);
             }

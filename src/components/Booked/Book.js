@@ -1,34 +1,27 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux'
+import compose from 'recompose/compose';
+
+import * as actions from '../../actions/index';
+import classes from './Book.module.css'
+
 import ComposeGetListBooked from '../HOC/getListBooked';
 
-import classes from './Book.module.css'
 import OneItemBooked from './OneItemBooked';
-import BillModal from '../Layout/BillModal';
-// import * as actions from '../../actions/index';
-
+import CaculatePrice from '../Share/functional/CaculatePrice';
+import ShowPrice from '../Share/component/ShowPrice';
 
 
 class Book extends Component {
 
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isOpenModal: false
-        }
+    onOpenModal = () => {
+        this.props.openModal();
     }
 
-    getPrice = () => {
-        let price = 0;
-        if (this.props.listBooked.length > 0) {
-            this.props.listBooked.forEach(value => {
-                price += value.price;
-            })
-        }
-        return price;
-
+    onCloseModal = () => {
+        this.props.closeModal()
     }
 
     showListBooked = () => {
@@ -40,25 +33,13 @@ class Book extends Component {
         else return "chưa có món nào";
     }
 
-    onOpenModal = () => {
-        this.setState({
-            isOpenModal: true
-        })
-    }
-
-    onCloseModal = () => {
-        this.setState({
-            isOpenModal: false
-        })
-    }
-
     render() {
         return (
             <div>
                 <h1>Danh sách món bạn đã chọn</h1>
                 <div className={"alert alert-primary mt-3"} role="alert">
                     Số món khác nhau : {this.props.listBooked.length}
-                    <div>Tổng giá : {this.getPrice()} VNĐ</div>
+                    <CaculatePrice render={(getPrice) => <ShowPrice listBooked={this.props.listBooked} getPrice={getPrice} />} />
                 </div>
 
                 <div className={classes.BookContainer} >
@@ -66,13 +47,26 @@ class Book extends Component {
                         {this.showListBooked()}
                     </div>
                 </div>
-                <button type="button" className="btn btn-warning mt-5" onClick={this.onOpenModal}  >Gọi món</button>
-                {
-                    this.state.isOpenModal === true && <BillModal fuCloseModal={this.onCloseModal} />
-                }
+                <button disabled={this.props.listBooked.length > 0 ? false : true} type="button" className="btn btn-warning mt-5" onClick={this.onOpenModal}  >Gọi món</button>
             </div>
+
         )
     }
 }
 
-export default ComposeGetListBooked(Book)
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        openModal: () => {
+            dispatch(actions._openModal())
+        },
+        closeModal: () => {
+            dispatch(actions._closeModal())
+        }
+    }
+}
+
+export default compose(
+    ComposeGetListBooked,
+    connect(null, mapDispatchToProps)
+)(Book);

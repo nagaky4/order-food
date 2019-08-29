@@ -1,0 +1,31 @@
+.BillModalContainer {
+  position: fixed;
+  /* top: 10%; */
+  left: 20%;
+  z-index: 10;
+  width: 60%;
+  text-align: center;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px 1px black;
+  padding: 16px;
+  box-sizing: border-box;
+  transition: 0.4s;
+  animation: move-top 1s forwards;
+}
+
+@keyframes move-top {
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: 10%;
+  }
+}
+
+@media (min-width: 600px) {
+  .Modal {
+    width: 500px;
+    left: calc(50% - 250px);
+  }
+}

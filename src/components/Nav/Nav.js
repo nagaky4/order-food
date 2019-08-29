@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, NavLink, Link } from 'react-router-dom';
+import { Route, NavLink, Link } from 'react-router-dom';
 
 import Home from '../Home/Home';
 import Menu from '../Menu/Menu';
 import DetailDish from '../Menu/DetailDish';
 
-import ComposeGetListBooked from '../HOC/getListBooked';
+import CartIcon from './CartIcon';
 
 import data from '../DB/dataFake';
+import Bill from '../Bill/Bill';
 
 
 class Nav extends Component {
     render() {
         return (
-
-            <Router>
+            <>
                 <nav className="navbar navbar-expand-sm navbar-light" style={{ 'backgroundColor': '#e3f2fd' }} >
                     <Link className="navbar-brand" to="/">Quán ăn miền trung </Link>
                     <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
@@ -36,7 +36,7 @@ class Nav extends Component {
 
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
-                            <div className="cart-icon"><span className="fa fa-cart-plus" ></span><span className="num-cart">{this.props.listBooked.length}</span> </div>
+                            <CartIcon />
                             <input className="form-control mr-sm-2" type="text" placeholder="Tìm kiếm" />
                             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
                         </form>
@@ -50,10 +50,8 @@ class Nav extends Component {
                     var value = data.filter(item => item.id === paramId)[0];
                     return <DetailDish value={value} />
                 }} />
-
-            </Router>
-
-
+                <Route path="/order-now" exact component={Bill} />
+            </>
 
 
         )
@@ -62,4 +60,4 @@ class Nav extends Component {
 
 
 
-export default ComposeGetListBooked(Nav)
+export default Nav

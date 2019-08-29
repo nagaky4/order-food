@@ -5,7 +5,7 @@ import * as actions from '../../actions/index'
 const OneItemBooked = (props) => {
 
     const onDeleteItem = (id) => {
-
+        
         props.deleteItem(id);
     }
     return (

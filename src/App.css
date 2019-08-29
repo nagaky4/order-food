@@ -11,3 +11,7 @@
   color: red;
   font-weight: 600;
 }
+
+.onShowModal {
+  opacity: 0;
+}
