@@ -14,6 +14,11 @@
   animation: move-top 1s forwards;
 }
 
+.TableContainer {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
 @keyframes move-top {
   0% {
     top: 0%;

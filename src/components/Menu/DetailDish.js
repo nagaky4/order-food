@@ -1,6 +1,8 @@
 import React from 'react';
 import ComposeAddToCart from '../HOC/addToCart'
 
+import compose from 'recompose/compose'
+import withConvertVND from '../HOC/withConvertVND';
 
 const DetailDish = (props) => {
     return (
@@ -8,7 +10,7 @@ const DetailDish = (props) => {
         <div>
             <div className="jumbotron">
                 <h1 className="display-3">{props.value.name}</h1>
-                <p className="lead">{props.value.price} VNĐ</p>
+                <p className="lead">{props.convertVND(props.value.price)} VNĐ</p>
                 <img src={props.value.images} className="img-fluid" style={{ 'width': '400px', 'height': 'auto' }} alt="" />
                 <hr className="my-2" />
                 <p>{props.value.detail}</p>
@@ -21,4 +23,7 @@ const DetailDish = (props) => {
 
 }
 
-export default ComposeAddToCart(DetailDish);
+export default compose(
+    ComposeAddToCart,
+    withConvertVND
+)(DetailDish);

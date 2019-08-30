@@ -1,28 +1,41 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 
-class CaculatePrice extends Component {
+const CaculatePrice = (props) => {
 
-    getPrice = (listBooked) => {
-        console.log('list ', listBooked);
-        console.log('type of ', typeof (listBooked));
-
+    const caculatePrice = (list) => {
         let price = 0;
-        if (listBooked && listBooked.length > 0) {
-            listBooked.forEach(value => {
+        if (list && list.length > 0) {
+            list.forEach(value => {
                 price += value.price;
             })
         }
         return price;
     }
 
-    render() {
-        return (
-            <div>
-                {this.props.render(this.getPrice)}
-            </div>
-        )
+    const getPrice = (list) => {
+        let price = 0;
+        if (list.length > 0) {
+            if (Array.isArray(list[0])) {
+                list.forEach(item => {
+                    price += caculatePrice(item);
+                })
+            }
+            else {
+                price = caculatePrice(list);
+            }
+        }
+
+        return price;
     }
+
+
+    return (
+        <div>
+            {props.render(getPrice)}
+        </div>
+    )
+
 }
 
 export default CaculatePrice

@@ -1,6 +1,5 @@
 .NotifyPortalContainer {
   position: fixed;
-  top: 10%;
   right: 5%;
   z-index: 100;
   transition: 0.4s;

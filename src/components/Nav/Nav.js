@@ -9,12 +9,13 @@ import CartIcon from './CartIcon';
 
 import data from '../DB/dataFake';
 import Bill from '../Bill/Bill';
+import Aux from '../HOC/Auxiliary';
 
 
 class Nav extends Component {
     render() {
         return (
-            <>
+            <Aux>
                 <nav className="navbar navbar-expand-sm navbar-light" style={{ 'backgroundColor': '#e3f2fd' }} >
                     <Link className="navbar-brand" to="/">Quán ăn miền trung </Link>
                     <button className="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
@@ -51,7 +52,7 @@ class Nav extends Component {
                     return <DetailDish value={value} />
                 }} />
                 <Route path="/order-now" exact component={Bill} />
-            </>
+            </Aux>
 
 
         )

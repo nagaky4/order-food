@@ -11,7 +11,9 @@ import ComposeGetListBooked from '../../HOC/getListBooked';
 import ShowPrice from '../../Share/component/ShowPrice';
 import CaculatePrice from '../../Share/functional/CaculatePrice';
 import Backdrop from '../Backdrop/Backdrop';
+import withConvertVND from '../../HOC/withConvertVND';
 
+import Aux from '../../HOC/Auxiliary';
 
 
 class BillModal extends Component {
@@ -24,7 +26,7 @@ class BillModal extends Component {
                         <td>{index + 1}</td>
                         <td>{value.name}</td>
                         <td>{value.number}</td>
-                        <td>{value.price} VNĐ</td>
+                        <td>{this.props.convertVND(value.price)} VNĐ</td>
                     </tr>
                 )
             })
@@ -45,7 +47,7 @@ class BillModal extends Component {
 
     render() {
         return ReactDom.createPortal(
-            <>
+            <Aux>
                 <Backdrop show={this.props.isOpenModal} closeModal={this.props.closeModal} />
                 {this.props.isOpenModal ? (
 
@@ -53,22 +55,24 @@ class BillModal extends Component {
                         <div className="jumbotron jumbotron-fluid">
                             <div className="container">
                                 {this.props.listBooked.length > 0 ? (
-                                    <>
+                                    <Aux>
                                         <h1 className="display-2">Các món bạn đã gọi</h1>
-                                        <table className="table table-inverse table-inverse">
-                                            <thead className="thead-inverse">
-                                                <tr>
-                                                    <th>STT</th>
-                                                    <th>Tên món</th>
-                                                    <th>Số phần</th>
-                                                    <th>Thành tiền</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                        <div className={classes.TableContainer}>
+                                            <table className="table table-inverse table-inverse">
+                                                <thead className="thead-inverse">
+                                                    <tr>
+                                                        <th>STT</th>
+                                                        <th>Tên món</th>
+                                                        <th>Số phần</th>
+                                                        <th>Thành tiền</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
 
-                                                {this.loadRowTable()}
-                                            </tbody>
-                                        </table>
+                                                    {this.loadRowTable()}
+                                                </tbody>
+                                            </table>
+                                        </ div>
                                         <hr className="my-2" />
                                         <CaculatePrice render={(getPrice) => <ShowPrice list={this.props.listBooked} getPrice={getPrice} />} />
                                         <p className="lead">
@@ -77,13 +81,13 @@ class BillModal extends Component {
                                                 <button type="button" className="btn btn-primary" onClick={this.onHanleBook} >Gọi</button>
                                             </Link>
                                         </p>
-                                    </>
+                                    </Aux>
                                 ) : (<div>Bạn chưa đặt món nào cả nè</div>)}
                             </div>
                         </div>
                     </div>
                 ) : ''}
-            </>
+            </Aux>
             , document.getElementById('modal-bill'));
     }
 }
@@ -111,5 +115,6 @@ const mapDispatchToProps = (dispatch, props) => {
 
 export default compose(
     ComposeGetListBooked,
-    connect(mapStateToProps, mapDispatchToProps)
+    connect(mapStateToProps, mapDispatchToProps),
+    withConvertVND
 )(BillModal)

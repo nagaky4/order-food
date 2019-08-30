@@ -36,7 +36,12 @@ const addToCart = (Wrapped) => {
         }, [isBooked])
 
         const onHanleChange = (e) => {
-            setNumOfItem(parseInt(e.target.value));
+            let value = e.target.value
+            if (value && parseInt(value) > 10) {
+                setNumOfItem(10);
+            } 
+            else if (value)
+                setNumOfItem(parseInt(e.target.value));
         }
         return (
 

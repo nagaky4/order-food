@@ -1,10 +1,20 @@
 import React, { Fragment } from 'react'
 
 import { connect } from 'react-redux'
+import compose from 'recompose/compose';
+
 import CaculatePrice from '../Share/functional/CaculatePrice';
 import ShowPrice from '../Share/component/ShowPrice';
+import withConvertVND from '../HOC/withConvertVND';
+
+import * as actions from '../../actions/index';
 
 const Bill = (props) => {
+
+    const onHandlePay = () => {
+        alert('Cảm ơn quý khách ,hẹn gặp lại ^^');
+        props.clearBill();
+    }
 
     const showTable = () => {
 
@@ -27,16 +37,12 @@ const Bill = (props) => {
                                 {
                                     iteam.map((value, key) => {
                                         return (
-
                                             <tr key={key} >
                                                 <td >{key + 1}</td>
                                                 <td>{value.name}</td>
                                                 <td>{value.number}</td>
-                                                <td>{value.price} VNĐ</td>
-
-
+                                                <td>{props.convertVND(value.price)} VNĐ</td>
                                             </tr>
-
                                         )
                                     })
                                 }
@@ -46,8 +52,7 @@ const Bill = (props) => {
                         <br />
                     </Fragment>
                 )
-            }
-            )
+            })
 
         } else {
             return <h1>Bạn chưa có gọi món nào cả</h1>
@@ -57,11 +62,10 @@ const Bill = (props) => {
     const showMoney = () => {
         if (props.listBill.length > 0) {
             return (
-                <>
-                    <CaculatePrice render={(getPrice) => <ShowPrice list={props.listBill} getPrice={getPrice} />} />
-                    <h2>Tổng tiền :  4000VND</h2>
-                    <button type="button" className="btn btn-primary">Tính tiền</button>
-                </>
+                <Fragment>
+                    <CaculatePrice render={(getPrice) => <ShowPrice className='billPrice' list={props.listBill} getPrice={getPrice} />} />
+                    <button type="button" className="btn btn-primary" onClick={onHandlePay}>Tính tiền</button>
+                </Fragment>
             )
         }
     }
@@ -82,4 +86,15 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(Bill)
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        clearBill: () => {
+            dispatch(actions._clearBill())
+        }
+    }
+}
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withConvertVND
+)(Bill)
