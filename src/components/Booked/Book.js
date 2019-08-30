@@ -39,7 +39,7 @@ class Book extends Component {
                 <h1>Danh sách món bạn đã chọn</h1>
                 <div className={"alert alert-primary mt-3"} role="alert">
                     Số món khác nhau : {this.props.listBooked.length}
-                    <CaculatePrice render={(getPrice) => <ShowPrice listBooked={this.props.listBooked} getPrice={getPrice} />} />
+                    <CaculatePrice render={(getPrice) => <ShowPrice list={this.props.listBooked} getPrice={getPrice} />} />
                 </div>
 
                 <div className={classes.BookContainer} >

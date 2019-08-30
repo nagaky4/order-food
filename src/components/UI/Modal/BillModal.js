@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactDom from 'react-dom';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import compose from 'recompose/compose';
 
@@ -15,13 +15,6 @@ import Backdrop from '../Backdrop/Backdrop';
 
 
 class BillModal extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            isRedirect: false
-        }
-    }
 
     loadRowTable = () => {
         if (this.props.listBooked && this.props.listBooked.length > 0) {
@@ -42,18 +35,15 @@ class BillModal extends Component {
 
         let check = window.confirm('Bạn có muốn gọi thực đơn này không?')
         if (check) {
-            this.setState({
-                isRedirect: true
-            })
+
+            this.props.addToBill(this.props.listBooked);
+            this.props.clearListBooked();
+            this.props.closeModal();
         }
 
     }
 
     render() {
-        console.log('state redirect ', this.state.isRedirect);
-        console.log('render modal');
-        if (this.state.isRedirect === true) return <Redirect to="/order-now" />
-
         return ReactDom.createPortal(
             <>
                 <Backdrop show={this.props.isOpenModal} closeModal={this.props.closeModal} />
@@ -80,10 +70,12 @@ class BillModal extends Component {
                                             </tbody>
                                         </table>
                                         <hr className="my-2" />
-                                        <CaculatePrice render={(getPrice) => <ShowPrice listBooked={this.props.listBooked} getPrice={getPrice} />} />
+                                        <CaculatePrice render={(getPrice) => <ShowPrice list={this.props.listBooked} getPrice={getPrice} />} />
                                         <p className="lead">
                                             <button type="button" className="btn btn-warning mr-2" onClick={this.props.closeModal}>Đóng</button>
-                                            <button type="button" className="btn btn-primary" onClick={this.onHanleBook} >Gọi</button>
+                                            <Link to="/order-now" >
+                                                <button type="button" className="btn btn-primary" onClick={this.onHanleBook} >Gọi</button>
+                                            </Link>
                                         </p>
                                     </>
                                 ) : (<div>Bạn chưa đặt món nào cả nè</div>)}
@@ -106,6 +98,12 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         closeModal: () => {
             dispatch(actions._closeModal())
+        },
+        clearListBooked: () => {
+            dispatch(actions._clearListBooked());
+        },
+        addToBill: (item) => {
+            dispatch(actions._addToBill(item));
         }
     }
 }

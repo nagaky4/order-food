@@ -25,6 +25,12 @@ export const _deleteItem = (id) => {
     }
 }
 
+export const _clearListBooked = () => {
+    return {
+        type: types.CLEAR_LIST_BOOKED
+    }
+}
+
 export const _openModal = () => {
     return {
         type: types.OPEN_MODAL
@@ -34,5 +40,28 @@ export const _openModal = () => {
 export const _closeModal = () => {
     return {
         type: types.CLOSE_MODAL
+    }
+}
+
+
+export const _getBill = () => {
+    return {
+        type: types.GET_BILL
+    }
+}
+
+
+export const _addToBill = (item) => {
+    return {
+        type: types.ADD_TO_BILL,
+        payload: {
+            item: item
+        }
+    }
+}
+
+export const _clearBill = () => {
+    return {
+        type: types.CLEAR_BILL
     }
 }

@@ -33,6 +33,9 @@ const listBookedReducer = (state = initialState, action) => {
             const id = action.payload.id;
             state = state.filter(value => id !== value.id);
             return [...state];
+        case types.CLEAR_LIST_BOOKED:
+            state = [];
+            return [...state];
         default:
             return state;
     }

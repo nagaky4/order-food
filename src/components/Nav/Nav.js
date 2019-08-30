@@ -30,7 +30,7 @@ class Nav extends Component {
                                 <NavLink className="nav-link" exact to="/menu" activeClassName="active" >Món ăn</NavLink>
                             </li>
                             <li className="nav-item" >
-                                <NavLink className="nav-link" exact to="/order-now" activeClassName="active">Thanh toán</NavLink>
+                                <NavLink className="nav-link" exact to="/order-now" activeClassName="active">Hóa đơn</NavLink>
                             </li>
 
 
