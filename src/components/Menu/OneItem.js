@@ -7,7 +7,7 @@ import compose from 'recompose/compose'
 import * as classes from './OneItem.module.css';
 import withConvertVND from '../HOC/withConvertVND';
 
-const OneItem = (props) => {
+export const OneItem = (props) => {
     return (
 
         <div className="col-4" key={props.value.id}>
@@ -20,7 +20,6 @@ const OneItem = (props) => {
                     <p>{props.convertVND(props.value.price)} VNĐ</p>
 
                     {props.children}
-
                 </div>
             </div>
         </div >

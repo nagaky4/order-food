@@ -4,7 +4,7 @@ import ComposeAddToCart from '../HOC/addToCart'
 import compose from 'recompose/compose'
 import withConvertVND from '../HOC/withConvertVND';
 
-const DetailDish = (props) => {
+export const DetailDish = (props) => {
     return (
 
         <div>
