@@ -14,6 +14,10 @@
   animation: move-top 1s forwards;
 }
 
+.TitleModal {
+  font-size: 50px;
+}
+
 .TableContainer {
   max-height: 300px;
   overflow-y: scroll;
@@ -32,5 +36,15 @@
   .Modal {
     width: 500px;
     left: calc(50% - 250px);
+  }
+}
+
+@media (max-width: 450px) {
+  .BillModalContainer {
+    width: 100%;
+    left: 0%;
+  }
+  .TitleModal {
+    font-size: 16px;
   }
 }

@@ -10,7 +10,7 @@ import withConvertVND from '../HOC/withConvertVND';
 export const OneItem = (props) => {
     return (
 
-        <div className="col-4" key={props.value.id}>
+        <div className="col-sm-4" key={props.value.id}>
             <div className="card text-center mt-2 mb-2 one-item">
                 <Link to={'/menu/' + props.value.id} >
                     <img className={classes.StyleImage + " card-img-top"} src={props.value.images} alt="" />

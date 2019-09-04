@@ -56,7 +56,7 @@ class BillModal extends Component {
                             <div className="container">
                                 {this.props.listBooked.length > 0 ? (
                                     <Aux>
-                                        <h1 className="display-2">Các món bạn đã gọi</h1>
+                                        <div className={classes.TitleModal}>Các món bạn đã gọi</div>
                                         <div className={classes.TableContainer}>
                                             <table className="table table-inverse table-inverse">
                                                 <thead className="thead-inverse">

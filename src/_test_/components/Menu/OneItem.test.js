@@ -3,7 +3,7 @@ import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { OneItem } from './OneItem';
+import { OneItem } from '../../../components/Menu/OneItem';
 
 configure({ adapter: new Adapter() });
 
