@@ -12,3 +12,8 @@ export const CLEAR_BILL = "CLEAR_BILL";
 export const OPEN_MODAL = "OPEN_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
 
+/**
+ * Login
+ */
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+

@@ -1,4 +1,4 @@
-
+import axios from 'axios';
 import * as types from '../constantTypes/index';
 
 export const _getList = () => {
@@ -65,3 +65,31 @@ export const _clearBill = () => {
         type: types.CLEAR_BILL
     }
 }
+
+/**
+ * Login
+ */
+export const _loginSuccess = (data) => {
+    return {
+        type: types.LOGIN_SUCCESS,
+        payload: {
+            token: data.idToken,
+            email: data.email,
+            isAuthenicated: true
+        }
+    }
+}
+
+export const _loginHandle = (authData) => {
+    return (dispatch) => {
+        return axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBAkZDrc49wE0Gic4cN_agqGYK7r7d7nbE`, authData)
+            .then(response => {
+                console.log('respinse',response);
+                dispatch(_loginSuccess(response.data))
+            })
+            .catch(error => {
+                // throw (error);
+                console.log(error)
+            });
+    };
+};

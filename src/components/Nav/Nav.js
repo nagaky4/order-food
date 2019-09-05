@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Route, NavLink, Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+
 import Home from '../Home/Home';
 import Menu from '../Menu/Menu';
 import DetailDish from '../Menu/DetailDish';
@@ -10,10 +12,21 @@ import CartIcon from './CartIcon';
 import data from '../DB/dataFake';
 import Bill from '../Bill/Bill';
 import Aux from '../HOC/Auxiliary';
+import Login from '../Authen/Login';
+import Logout from '../Authen/Logout';
 
 
 class Nav extends Component {
     render() {
+        const { isAuthenicated } = this.props;
+        let element = null;
+        if (isAuthenicated) {
+            element = <NavLink className="nav-link" exact to="/logout" activeClassName="active">Đăng xuất</NavLink>;
+           
+        } else {
+            element = <NavLink className="nav-link" exact to="/login" activeClassName="active">Đăng nhập</NavLink>
+        }
+
         return (
             <Aux>
                 <nav className="navbar navbar-expand-sm navbar-light fixed-top container" style={{ 'backgroundColor': '#e3f2fd' }} >
@@ -33,7 +46,9 @@ class Nav extends Component {
                             <li className="nav-item" >
                                 <NavLink className="nav-link" exact to="/order-now" activeClassName="active">Hóa đơn</NavLink>
                             </li>
-
+                            <li className="nav-item" >
+                                {element}
+                            </li>
 
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
@@ -45,6 +60,8 @@ class Nav extends Component {
                 </nav>
 
                 <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/logout" component={Logout} />
                 <Route path="/menu" exact component={Menu} />
                 <Route path="/menu/:id" exact render={(props) => {
                     var paramId = props.match.params.id;
@@ -59,6 +76,11 @@ class Nav extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        isAuthenicated: state.userLogin.isAuthenicated
+    }
+}
 
 
-export default Nav
+export default connect(mapStateToProps, null)(Nav)
