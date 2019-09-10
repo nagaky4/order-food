@@ -8,36 +8,42 @@ import ShowPrice from '../Share/component/ShowPrice';
 import withConvertVND from '../HOC/withConvertVND';
 
 import * as actions from '../../actions/index';
-import axios from '../../axios';
+import Controller from '../../Controlller/Controller';
 import Spiner from '../UI/spinner/Spiner';
+
 
 const Bill = (props) => {
 
     const [loading, setLoading] = useState(false);
+    const [errMess, setErrMess] = useState(null);
+    const [err, setErr] = useState(false);
 
-    const onHandlePay = () => {
-        setLoading(true);
-        var data = {
-            bill: {
-                ...props.listBill
-            },
-            name: 'Nickle',
-            address: {
-                street: 'lac long quan',
-                numberAddress: '124',
-                province: 'HCM'
+    const onHandlePay = async () => {
+
+        if (props.authenUser.isAuthenicated) {
+            setLoading(true);
+            var data = {
+                bill: {
+                    ...props.listBill
+                },
+                email: props.authenUser.email,
+                dateBook: new Date()
             }
-
-        }
-        axios.post('/bill.json', data).then(
-            res => {
+            try {
+                const res = await Controller.addBill(props.authenUser.token, data);
+                if (res.status === 200) {
+                    setLoading(false);
+                    props.clearBill();
+                }
+            } catch (error) {
                 setLoading(false);
-                props.clearBill();
+                setErr(true);
             }
-        ).catch(err => {
-            setLoading(false);
-            console.log(err);
-        })
+
+        } else {
+            setErrMess('Bạn cần phải đăng nhập để thực hiện chức năng này!')
+        }
+
 
 
     }
@@ -104,20 +110,26 @@ const Bill = (props) => {
         }
     }
 
-    return (
-
+    let summary = (
         <div className="marginTopMenu">
             {showTable()}
             {showLoadingSpiner()}
             {showMoney()}
+            <h1 style={{color:'red'}}>{errMess}</h1>
         </div>
     )
+    if (err) {
+        summary = <h1>SOMETHING WENT WRONG!</h1>
+    }
+
+    return summary;
 }
 
 
 const mapStateToProps = (state) => {
     return {
-        listBill: state.listBillReducer
+        listBill: state.listBillReducer,
+        authenUser: state.authenUser
     }
 }
 

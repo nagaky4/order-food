@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -9,7 +9,6 @@ import NotifyPortal from '../UI/Notify/NotifyPortal'
 const addToCart = (Wrapped) => {
 
     return (props) => {
-
         const [numOfItem, setNumOfItem] = useState(0);
         const [isBooked, setIsBooked] = useState(false);
 
@@ -39,31 +38,29 @@ const addToCart = (Wrapped) => {
             let value = e.target.value
             if (value && parseInt(value) > 10) {
                 setNumOfItem(10);
-            } 
+            }
             else if (value)
                 setNumOfItem(parseInt(e.target.value));
         }
         return (
 
             <Wrapped {...props}>
-                <Fragment >
-                    <div className="form-group">
-                        <label htmlFor=""></label>
-                        <input
-                            className="form-control" type="number"
-                            min="0" max="10"
-                            value={numOfItem}
-                            onChange={onHanleChange}
-                        />
-                        <small id="helpId" className="form-text text-muted">Số lượng</small>
-                    </div>
-                    <div className="form-group">
-                        <button disabled={numOfItem <= 0 ? true : false}
-                            type="button"
-                            onClick={onAddToList}
-                            className="btn btn-primary">Thêm</button>
-                    </div>
-                </Fragment>
+                <div className="form-group">
+                    <label htmlFor=""></label>
+                    <input
+                        className="form-control" type="number"
+                        min="0" max="10"
+                        value={numOfItem}
+                        onChange={onHanleChange}
+                    />
+                    <small id="helpId" className="form-text text-muted">Số lượng</small>
+                </div>
+                <div className="form-group">
+                    <button disabled={numOfItem <= 0 ? true : false}
+                        type="button"
+                        onClick={onAddToList}
+                        className="btn btn-primary">Thêm</button>
+                </div>
                 {isBooked && <NotifyPortal />}
             </Wrapped >
 
@@ -81,6 +78,8 @@ var mapDispatchToProps = (dispatch, props) => {
     }
 }
 
-const ComposeAddToCart = compose(connect(null, mapDispatchToProps), addToCart);
+const ComposeAddToCart = compose(
+    connect(null, mapDispatchToProps),
+     addToCart);
 
 export default ComposeAddToCart;

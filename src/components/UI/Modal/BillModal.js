@@ -35,13 +35,9 @@ class BillModal extends Component {
 
     onHanleBook = () => {
 
-        let check = window.confirm('Bạn có muốn gọi thực đơn này không?')
-        if (check) {
-
-            this.props.addToBill(this.props.listBooked);
-            this.props.clearListBooked();
-            this.props.closeModal();
-        }
+        this.props.addToBill(this.props.listBooked);
+        this.props.clearListBooked();
+        this.props.closeModal();
 
     }
 

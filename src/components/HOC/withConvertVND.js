@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 const withConvertVND = (Wrapper) => {
 
     return class extends Component {
+
         convertVND = (price) => {
             price = price.toString();
             if (price && price.toString().length > 0) {

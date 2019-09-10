@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 
-import data from '../DB/dataFake'
 import Book from '../Booked/Book';
-import OneItem from './OneItem';
+import Dish from './Dish/Dish';
 import classes from './Menu.module.css';
-// import Pagination from '../UI/Pagination/Pagination';
+
+import Controller from '../../Controlller/Controller';
+import Spiner from '../UI/spinner/Spiner';
 
 
 class Menu extends Component {
@@ -14,24 +15,52 @@ class Menu extends Component {
         this.state = {
             listFood: [],
             currentPage: 1,
-            foodsPerPage: 3
+            foodsPerPage: 3,
+            loading: false,
+            err: null
         }
+        this._isMounted = false;
     }
 
-    loadData = () => {
+    loadData = async () => {
         this.setState({
-            listFood: data
+            loading: true
         })
+        try {
+            var foods = await Controller.getFoods();
+            let indexOfFoods = ''
+            if (foods) {
+                for (var i in foods.data) {
+                    indexOfFoods = i
+                }
+                const data = foods.data[indexOfFoods];
+                if (data) {
+                    this._isMounted = true && this.setState({
+                        listFood: data,
+                        loading: false
+                    })
+                }
+            }
+        } catch (error) {
+
+            this.setState({
+                loading: false,
+                err: error
+            })
+        }
     }
 
     renderFood = (currentFoods) => {
         return currentFoods.map(value => {
-            return <OneItem value={value} key={value.id} />
+            return <Dish value={value} key={value.id} />
         })
     }
 
     componentDidMount() {
-        this.loadData();
+        this._isMounted = true && this.loadData();
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     onHandleChangePage = (prev, choose, next, first, numOfPage) => {
@@ -72,15 +101,14 @@ class Menu extends Component {
     }
 
     render() {
-
         const { listFood, currentPage, foodsPerPage } = this.state;
         const indexOfLastPage = currentPage * foodsPerPage;
         const indexOfFirstPage = indexOfLastPage - foodsPerPage;
         const currentFoods = listFood.slice(indexOfFirstPage, indexOfLastPage);
         const numOfPage = Math.ceil(listFood.length / foodsPerPage);
 
-        return (
-            <div className="row marginTopMenu" >
+        let sumary = (
+            <div className="row" >
                 <div className={"col-sm-8 "}  >
                     <div className="row">
                         {this.renderFood(currentFoods)}
@@ -116,6 +144,14 @@ class Menu extends Component {
                 </nav>
             </div >
         )
+        if (this.state.loading) {
+            sumary = <Spiner />;
+        }
+        if (!this.state.loading && this.state.err) {
+            sumary = <h1>Somthing is Wrong !</h1>
+        }
+
+        return sumary;
     }
 }
 

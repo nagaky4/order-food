@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component <Dish /> Have props snapshot renders 1`] = `
+<div
+  className="col-sm-4"
+>
+  <div
+    className="card text-center mt-2 mb-2 one-item"
+  >
+    <a
+      href="/menu/1"
+      onClick={[Function]}
+    >
+      <img
+        alt=""
+        className="undefined card-img-top"
+        src="https://beptueu.vn/hinhanh/tintuc/top-15-hinh-anh-mon-an-ngon-viet-nam-khien-ban-khong-the-roi-mat-2.jpg"
+      />
+    </a>
+    <div
+      className="card-body"
+    >
+      <h4
+        className="undefined card-title"
+      >
+        Bánh xèo
+      </h4>
+      <p>
+         VNĐ
+      </p>
+    </div>
+  </div>
+</div>
+`;

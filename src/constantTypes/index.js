@@ -17,3 +17,7 @@ export const CLOSE_MODAL = "CLOSE_MODAL";
  */
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 
+/**
+ * Logout
+ */
+export const LOGOUT = "LOGOUT";

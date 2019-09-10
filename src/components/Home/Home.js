@@ -22,7 +22,7 @@ class Home extends Component {
         if (this.state.isRedirect === true) return <Redirect to='/menu' />
         else
             return (
-                <div className="jumbotron marginTopMenu">
+                <div className="jumbotron">
                     <h1 className="display-3">Chào mừng bạn đến với quán ăn miền trung</h1>
 
                     <hr className="my-2" />
