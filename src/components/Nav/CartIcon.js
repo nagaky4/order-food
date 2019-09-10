@@ -6,7 +6,7 @@ import compose from "recompose/compose";
 import ComposeGetListBooked from "../HOC/getListBooked";
 import * as actions from "../../actions/index";
 
-class CartIcon extends Component {
+export class CartIcon extends Component {
   onOpenModal = () => {
     this.props.openModal();
   };
@@ -24,7 +24,7 @@ class CartIcon extends Component {
       differItem = this.props.listBooked.length
         ? this.props.listBooked.length
         : 0;
-    }
+    } else differItem = 0;
 
     return (
       <div style={styleIcon} className="cart-icon" onClick={this.onOpenModal}>

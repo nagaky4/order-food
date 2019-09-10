@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow, mount, render } from "../../../../src/enzyme";
 
-import renderer from "react-test-renderer";
+// import renderer from "react-test-renderer";
 import { BrowserRouter as Router, NavLink } from "react-router-dom";
 
 import { createStore } from "redux";
