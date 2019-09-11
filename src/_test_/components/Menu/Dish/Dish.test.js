@@ -41,11 +41,11 @@ describe('Component <Dish />', () => {
             expect(wrapper.length).toBe(1);
         });
 
-        it('snapshot renders', () => {
-            const component = renderer.create(wrapper);
-            let tree = component.toJSON();
-            expect(tree).toMatchSnapshot();
-        });
+        // it('snapshot renders', () => {
+        //     const component = renderer.create(wrapper);
+        //     let tree = component.toJSON();
+        //     expect(tree).toMatchSnapshot();
+        // });
 
         it('should recive props is object', () => {
 
@@ -56,6 +56,13 @@ describe('Component <Dish />', () => {
                 images: 'https://beptueu.vn/hinhanh/tintuc/top-15-hinh-anh-mon-an-ngon-viet-nam-khien-ban-khong-the-roi-mat-2.jpg',
                 detail: 'Thuộc top 40 món ngon nhất Việt Nam do CNN bình chọn. Bánh xèo là món ngon bạn khó cưỡng lại được.'
             })
+
+
+
+        })
+
+        it('should render without error',()=>{
+             expect(wrapper.dive().dive().dive().find('.col-sm-4')).toHaveLength(1);
         })
 
     })

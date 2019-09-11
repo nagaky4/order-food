@@ -4,7 +4,7 @@ import DetailDish from './DetailDish'
 
 import data from '../../../DB/dataFake';
 
-const ChooseDish = props => {
+export const ChooseDish = props => {
 
     var paramId = props.match.params.id;
     var dish = data.filter(item => item.id === paramId)[0];

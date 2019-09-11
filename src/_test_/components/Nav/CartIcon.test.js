@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow, mount, render } from "../../../../src/enzyme";
+import { mount } from "../../../../src/enzyme";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
@@ -38,11 +38,11 @@ describe("description", () => {
     expect(wrapper.find(".num-cart").text()).toEqual(`${listItem.length}`);
   });
 
-  it('should open modal', () => {
+  it('should open modal when click icon', () => {
     wrapper = setUp({ listBooked: null, openModal: jest.fn() }).children();
-   
+
     // const onClick = jest.spyOn(wrapper.instance(),'onOpenModal');
-    
+
     wrapper.find('.cart-icon').simulate('click')
     expect(wrapper.props().openModal).toHaveBeenCalled()
   });

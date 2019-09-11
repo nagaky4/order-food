@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage --coverageDirectory=output/coverage/jest",
+    "test": "react-scripts test --watchAll=false --coverage --coverageDirectory=output/coverage/jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -44,17 +44,7 @@
   },
   
   "jest": {
-    "transformIgnorePatterns": [
-      "/node_modules/(?!@babel).+\\.js$"
-    ],
-    "transform": {
-      "^.+\\.js?$": "babel-jest"
-    },
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!<rootDir>/node_modules/",
-      "!<rootDir>/path/to/dir/"
-    ],
+   
     "coverageThreshold": {
       "global": {
         "branches": 90,

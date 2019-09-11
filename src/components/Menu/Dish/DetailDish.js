@@ -5,7 +5,7 @@ import compose from 'recompose/compose'
 import ComposeAddToCart from '../../HOC/addToCart'
 import withConvertVND from '../../HOC/withConvertVND';
 
-const DetailDish = (props) => {
+export const DetailDish = (props) => {
 
     return (
 
@@ -22,6 +22,16 @@ const DetailDish = (props) => {
             </div>
         </div>
     )
+}
+DetailDish.defaultProps = {
+    value: {
+        name: '',
+        price: '',
+        images: '',
+        detail: ''
+    },
+    children: '',
+    convertVND: () => { }
 }
 
 export default compose(
