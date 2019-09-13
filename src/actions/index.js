@@ -1,67 +1,64 @@
-
-import * as types from '../constantTypes/index';
+import * as types from "../constantTypes/index";
 
 export const _getList = () => {
-    return {
-        type: types.GET_LIST,
-    }
-}
+  return {
+    type: types.GET_LIST
+  };
+};
 
-export const _addToList = (item) => {
-    return {
-        type: types.ADD_TO_LIST,
-        payload: {
-            item: item
-        }
+export const _addToList = item => {
+  return {
+    type: types.ADD_TO_LIST,
+    payload: {
+      item: item
     }
-}
+  };
+};
 
-export const _deleteItem = (id) => {
-    return {
-        type: types.DELETE_ITEM,
-        payload: {
-            id: id
-        }
+export const _deleteItem = id => {
+  return {
+    type: types.DELETE_ITEM,
+    payload: {
+      id: id
     }
-}
+  };
+};
 
 export const _clearListBooked = () => {
-    return {
-        type: types.CLEAR_LIST_BOOKED
-    }
-}
+  return {
+    type: types.CLEAR_LIST_BOOKED
+  };
+};
 
 export const _openModal = () => {
-    return {
-        type: types.OPEN_MODAL
-    }
-}
+  return {
+    type: types.OPEN_MODAL
+  };
+};
 
 export const _closeModal = () => {
-    return {
-        type: types.CLOSE_MODAL
-    }
-}
-
+  return {
+    type: types.CLOSE_MODAL
+  };
+};
 
 export const _getBill = () => {
-    return {
-        type: types.GET_BILL
-    }
-}
+  return {
+    type: types.GET_BILL
+  };
+};
 
-
-export const _addToBill = (item) => {
-    return {
-        type: types.ADD_TO_BILL,
-        payload: {
-            item: item
-        }
+export const _addToBill = item => {
+  return {
+    type: types.ADD_TO_BILL,
+    payload: {
+      item: item
     }
-}
+  };
+};
 
 export const _clearBill = () => {
-    return {
-        type: types.CLEAR_BILL
-    }
-}
+  return {
+    type: types.CLEAR_BILL
+  };
+};

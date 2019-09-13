@@ -148,7 +148,7 @@ class Menu extends Component {
             sumary = <Spiner />;
         }
         if (!this.state.loading && this.state.err) {
-            sumary = <h1>Somthing is Wrong !</h1>
+            sumary = <h1>Something were Wrong !</h1>
         }
 
         return sumary;
